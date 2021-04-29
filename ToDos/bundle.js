@@ -160,20 +160,19 @@ var todosReducer = function todosReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
   var action = arguments.length > 1 ? arguments[1] : undefined;
   Object.freeze(state);
-  var nextState = Object.assign({}, state);
   var nextState2 = Object.assign({}, state);
   debugger;
 
   switch (action.type) {
     case _actions_todo_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_TODOS:
-      state = [];
-      nextState[action.todos.id] = action.todos;
+      var nextState = {}; // nextState[action.todos.id] = action.todos;
+      // return nextState;
+      // let actionsArr = Array.from(action.todos);
+
+      action.todos.forEach(function (todo) {
+        nextState[todo.id] = todo;
+      });
       return nextState;
-    // let newobject = {};
-    // action.todos.forEach( todo => {
-    //   newobject[todo.id] = todo;
-    // })
-    // return newobject;
 
     case _actions_todo_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_TODO:
       debugger;
