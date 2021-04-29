@@ -19,20 +19,27 @@ const todosReducer = (state = initialState, action) => {
     Object.freeze(state);
     const nextState = Object.assign({}, state);    
     const nextState2 = Object.assign({}, state);    
-    // debugger
+    debugger
     switch (action.type) {
         case RECEIVE_TODOS:   
-            // debugger
-            nextState[action.todos.id] = action.todos;
-            return nextState;
+          state = []; 
+
+          nextState[action.todos.id] = action.todos;
+          return nextState;
+            // let newobject = {};
+            // action.todos.forEach( todo => {
+            //   newobject[todo.id] = todo;
+            // })
+            // return newobject;
         case RECEIVE_TODO:
-            // debugger
+            debugger
             nextState2[action.todo.id] = action.todo;
             return nextState2;
         default:
-            // debugger
+            debugger
             return state;
     }
   };
   
+
   export default todosReducer;

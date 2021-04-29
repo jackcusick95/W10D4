@@ -161,21 +161,27 @@ var todosReducer = function todosReducer() {
   var action = arguments.length > 1 ? arguments[1] : undefined;
   Object.freeze(state);
   var nextState = Object.assign({}, state);
-  var nextState2 = Object.assign({}, state); // debugger
+  var nextState2 = Object.assign({}, state);
+  debugger;
 
   switch (action.type) {
     case _actions_todo_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_TODOS:
-      // debugger
+      state = [];
       nextState[action.todos.id] = action.todos;
       return nextState;
+    // let newobject = {};
+    // action.todos.forEach( todo => {
+    //   newobject[todo.id] = todo;
+    // })
+    // return newobject;
 
     case _actions_todo_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_TODO:
-      // debugger
+      debugger;
       nextState2[action.todo.id] = action.todo;
       return nextState2;
 
     default:
-      // debugger
+      debugger;
       return state;
   }
 };
