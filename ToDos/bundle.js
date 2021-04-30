@@ -235,80 +235,10 @@ var Root = function Root(_ref) {
 
 /***/ }),
 
-/***/ "./frontend/components/todos/todo_list.jsx":
+/***/ "./frontend/components/todos/todo_form.jsx":
 /*!*************************************************!*\
-  !*** ./frontend/components/todos/todo_list.jsx ***!
+  !*** ./frontend/components/todos/todo_form.jsx ***!
   \*************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _todo_list_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./todo_list_item */ "./frontend/components/todos/todo_list_item.jsx");
-
-
-
-var ToDoList = function ToDoList() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, " Todo List goes here!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_todo_list_item__WEBPACK_IMPORTED_MODULE_1__.default, null));
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ToDoList);
-
-/***/ }),
-
-/***/ "./frontend/components/todos/todo_list_container.jsx":
-/*!***********************************************************!*\
-  !*** ./frontend/components/todos/todo_list_container.jsx ***!
-  \***********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _todo_list__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./todo_list */ "./frontend/components/todos/todo_list.jsx");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../reducers/selectors */ "./frontend/reducers/selectors.js");
-
-
-
-
-var mapStateToProps = function mapStateToProps(state) {
-  return {
-    todos: (0,_reducers_selectors__WEBPACK_IMPORTED_MODULE_2__.allTodos)(state)
-  };
-};
-
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    receiveToDo: function (_receiveToDo) {
-      function receiveToDo(_x) {
-        return _receiveToDo.apply(this, arguments);
-      }
-
-      receiveToDo.toString = function () {
-        return _receiveToDo.toString();
-      };
-
-      return receiveToDo;
-    }(function (toDo) {
-      dispatch(receiveToDo(too));
-    })
-  };
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapStateToProps, mapDispatchToProps)(_todo_list__WEBPACK_IMPORTED_MODULE_0__.default));
-
-/***/ }),
-
-/***/ "./frontend/components/todos/todo_list_item.jsx":
-/*!******************************************************!*\
-  !*** ./frontend/components/todos/todo_list_item.jsx ***!
-  \******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -339,7 +269,197 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+
+
+var TodoForm = /*#__PURE__*/function (_React$Component) {
+  _inherits(TodoForm, _React$Component);
+
+  var _super = _createSuper(TodoForm);
+
+  function TodoForm(props) {
+    var _this;
+
+    _classCallCheck(this, TodoForm);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      id: new Date().getTime(),
+      title: '',
+      body: '',
+      done: false
+    };
+    _this.updateTitle = _this.updateTitle.bind(_assertThisInitialized(_this));
+    _this.updateBody = _this.updateBody.bind(_assertThisInitialized(_this));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(TodoForm, [{
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      this.props.receiveTodo(this.state);
+      this.state = {
+        id: new Date().getTime(),
+        title: '',
+        body: '',
+        done: false
+      };
+    }
+  }, {
+    key: "updateTitle",
+    value: function updateTitle(e) {
+      // debugger
+      this.setState({
+        title: e.target.value
+      });
+    }
+  }, {
+    key: "updateBody",
+    value: function updateBody(e) {
+      // debugger
+      this.setState({
+        body: e.target.value
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+        onSubmit: this.handleSubmit
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Add Todo"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "Title", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "text",
+        value: this.state.title,
+        onChange: this.updateTitle
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "Body", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "text",
+        value: this.state.body,
+        onChange: this.updateBody
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "submit",
+        value: "Add Todo"
+      }));
+    }
+  }]);
+
+  return TodoForm;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TodoForm);
+
+/***/ }),
+
+/***/ "./frontend/components/todos/todo_list.jsx":
+/*!*************************************************!*\
+  !*** ./frontend/components/todos/todo_list.jsx ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _todo_list_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./todo_list_item */ "./frontend/components/todos/todo_list_item.jsx");
+/* harmony import */ var _todo_form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./todo_form */ "./frontend/components/todos/todo_form.jsx");
+ // import { render } from 'react-dom'
+
+
+
+
+var ToDoList = function ToDoList(props) {
+  debugger;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Todo List goes here!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, // props.todos.map(todo => <li key={todo.id}>Title: {todo.title}</li>)
+  props.todos.map(function (todo) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_todo_list_item__WEBPACK_IMPORTED_MODULE_1__.default, {
+      key: todo.id,
+      todo: todo
+    });
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_todo_form__WEBPACK_IMPORTED_MODULE_2__.default, {
+    receiveTodo: props.receiveTodo
+  }));
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ToDoList);
+
+/***/ }),
+
+/***/ "./frontend/components/todos/todo_list_container.jsx":
+/*!***********************************************************!*\
+  !*** ./frontend/components/todos/todo_list_container.jsx ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _todo_list__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./todo_list */ "./frontend/components/todos/todo_list.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../reducers/selectors */ "./frontend/reducers/selectors.js");
+/* harmony import */ var _actions_todo_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/todo_actions */ "./frontend/actions/todo_actions.js");
+
+
+
+
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    todos: (0,_reducers_selectors__WEBPACK_IMPORTED_MODULE_2__.allTodos)(state)
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    receiveTodo: function receiveTodo(todo) {
+      dispatch((0,_actions_todo_actions__WEBPACK_IMPORTED_MODULE_3__.receiveTodo)(todo));
+    }
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapStateToProps, mapDispatchToProps)(_todo_list__WEBPACK_IMPORTED_MODULE_0__.default));
+
+/***/ }),
+
+/***/ "./frontend/components/todos/todo_list_item.jsx":
+/*!******************************************************!*\
+  !*** ./frontend/components/todos/todo_list_item.jsx ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _todo_list_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./todo_list_container */ "./frontend/components/todos/todo_list_container.jsx");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 console.log("testing from items file");
+
 
 
 var TodoListItem = /*#__PURE__*/function (_React$Component) {
@@ -356,7 +476,8 @@ var TodoListItem = /*#__PURE__*/function (_React$Component) {
   _createClass(TodoListItem, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "salkdjfalskdjf"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "yoo"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "whattup"));
+      debugger;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Title: ", this.props.todo.title, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Body: ", this.props.todo.body, " "));
     }
   }]);
 

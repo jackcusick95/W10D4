@@ -1,5 +1,6 @@
 console.log("testing from items file"); 
 import React from 'react'; 
+import todo_list_container from './todo_list_container';
 
 
 class TodoListItem extends React.Component {
@@ -9,11 +10,11 @@ class TodoListItem extends React.Component {
     }
 
     render() {
+        debugger
         return (
             <div>
-                <li>salkdjfalskdjf</li>
-                <li>yoo</li>
-                <li>whattup</li>
+                <li>Title: {this.props.todo.title} </li>           
+                <li>Body: {this.props.todo.body} </li>           
             </div>
         ); 
     }
