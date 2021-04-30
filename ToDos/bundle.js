@@ -88,11 +88,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "RECEIVE_TODO": () => (/* binding */ RECEIVE_TODO),
 /* harmony export */   "RECEIVE_TODOS": () => (/* binding */ RECEIVE_TODOS),
+/* harmony export */   "REMOVE_TODO": () => (/* binding */ REMOVE_TODO),
 /* harmony export */   "receiveTodos": () => (/* binding */ receiveTodos),
-/* harmony export */   "receiveTodo": () => (/* binding */ receiveTodo)
+/* harmony export */   "receiveTodo": () => (/* binding */ receiveTodo),
+/* harmony export */   "removeTodo": () => (/* binding */ removeTodo)
 /* harmony export */ });
 var RECEIVE_TODO = "RECEIVE_TODO";
 var RECEIVE_TODOS = "RECEIVE_TODOS";
+var REMOVE_TODO = "REMOVE_TODO";
 var receiveTodos = function receiveTodos(todos) {
   return {
     type: RECEIVE_TODOS,
@@ -102,6 +105,12 @@ var receiveTodos = function receiveTodos(todos) {
 var receiveTodo = function receiveTodo(todo) {
   return {
     type: RECEIVE_TODO,
+    todo: todo
+  };
+};
+var removeTodo = function removeTodo(todo) {
+  return {
+    type: REMOVE_TODO,
     todo: todo
   };
 };
@@ -140,47 +149,45 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _actions_todo_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/todo_actions */ "./frontend/actions/todo_actions.js");
-
-var initialState = {
-  1: {
-    id: 1,
-    title: "wash car",
-    body: "with soap",
-    done: false
-  },
-  2: {
-    id: 2,
-    title: "wash dog",
-    body: "with shampoo",
-    done: true
-  }
-};
+ // const initialState = {
+//     1: {
+//       id: 1,
+//       title: "wash car",
+//       body: "with soap",
+//       done: false
+//     },
+//     2: {
+//       id: 2,
+//       title: "wash dog",
+//       body: "with shampoo",
+//       done: true
+//     }
+//   };
 
 var todosReducer = function todosReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var action = arguments.length > 1 ? arguments[1] : undefined;
   Object.freeze(state);
   var nextState2 = Object.assign({}, state);
-  debugger;
+  var nextState3 = Object.assign({}, state); // debugger
 
   switch (action.type) {
     case _actions_todo_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_TODOS:
-      var nextState = {}; // nextState[action.todos.id] = action.todos;
-      // return nextState;
-      // let actionsArr = Array.from(action.todos);
-
+      var nextState = {};
       action.todos.forEach(function (todo) {
         nextState[todo.id] = todo;
       });
       return nextState;
 
     case _actions_todo_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_TODO:
-      debugger;
+      // debugger
       nextState2[action.todo.id] = action.todo;
       return nextState2;
+    // case REMOVE_TODO:
+    //     return nextState3.filter(todo => todo !== action.todo); 
 
     default:
-      debugger;
+      // debugger
       return state;
   }
 };
@@ -30807,6 +30814,7 @@ var Todo = function Todo() {
 document.addEventListener("DOMContentLoaded", function () {
   var store = (0,_frontend_store_store__WEBPACK_IMPORTED_MODULE_2__.default)();
   window.store = store;
+  window.removeTodo = _frontend_actions_todo_actions__WEBPACK_IMPORTED_MODULE_3__.removeTodo;
   window.receiveTodo = _frontend_actions_todo_actions__WEBPACK_IMPORTED_MODULE_3__.receiveTodo;
   window.receiveTodos = _frontend_actions_todo_actions__WEBPACK_IMPORTED_MODULE_3__.receiveTodos;
   var root = document.getElementById('root');
